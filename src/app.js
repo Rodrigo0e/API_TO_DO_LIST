@@ -1,0 +1,23 @@
+// Importa o framework Express
+import express from "express";
+
+// Importa as rotas de tarefas
+import tarefasRoutes from "./routes/tarefasRoutes.js";
+
+// Importa o middleware de logs
+import { logger } from "./middleware/logger.js";
+
+// Cria a aplicação Express
+const app = express();
+
+// Permite que o servidor entenda JSON no corpo das requisições
+app.use(express.json());
+
+// Usa o middleware para registrar logs de cada requisição
+app.use(logger);
+
+// Usa as rotas de tarefas, acessadas a partir de /tarefas
+app.use("/tarefas", tarefasRoutes);
+
+// Exporta o app para ser usado no server.js
+export default app;
