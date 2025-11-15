@@ -70,10 +70,12 @@ O servidor será iniciado na porta configurada.
 TO-DO-LIST/
 ├── src/
 │   ├── config/
-│   │   └── database.js
+│   │   └── config.cjs
 │   ├── controllers/
 │   │   └── tarefasControllers.js
 │   ├── database/
+│   │   ├── migrations/
+│   │   │   └── 20251115154143-create-tarefas.cjs
 │   │   └── database.sqlite
 │   ├── logs/
 │   │   └── req.log
@@ -84,9 +86,12 @@ TO-DO-LIST/
 │   ├── routes/
 │   │   └── tarefasRoutes.js
 │   └── app.js
+├── .env
 ├── .env.example
 ├── .gitignore
+├── .sequelizerc
 ├── package.json
+├── package-lock.json
 ├── server.js
 └── README.md
 ```
