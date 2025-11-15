@@ -24,7 +24,8 @@ O projeto utiliza **SQLite** como banco de dados local e conta com um **sistema 
 - **dotenv** — para variáveis de ambiente (.env).  
 - **uuid** — para geração de identificadores únicos nas tarefas.  
 - **date-fns** — para formatação de data e hora nos logs.  
-- **nodemon** — para reiniciar automaticamente o servidor durante o desenvolvimento.  
+- **nodemon** — para reiniciar automaticamente o servidor durante o desenvolvimento.
+- **sequelize-cli** — ferramenta para criar e gerenciar migrations e tarefas do banco de dados.
 
 ---
 
