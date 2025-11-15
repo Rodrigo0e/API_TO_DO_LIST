@@ -7,15 +7,6 @@ import db from "./src/config/database.js";
 // Importa o modelo de Tarefa para o Sequelize reconhecer a tabela
 import "./src/models/tarefaModel.js";
 
-// Sincroniza o banco de dados (cria as tabelas se não existirem)
-db.sync()
-  .then(() => {
-    console.log("Banco sincronizado com sucesso!");
-  })
-  .catch((erro) => {
-    console.error("Erro ao sincronizar banco:", erro);
-  });
-
 // Define a porta do servidor
 const PORT = process.env.PORT || 3000;
 
