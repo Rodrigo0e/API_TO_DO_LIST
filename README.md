@@ -113,7 +113,7 @@ TO-DO-LIST/
 
 ## Autor
 
-Desenvolvido com 💻 por **Rodrigo Souza**  
+Desenvolvido por **Rodrigo Souza**  
 
 Este projeto foi desenvolvido como parte das atividades do curso da Programadores do Amanhã, com o objetivo de praticar Node.js, Express, Sequelize e boas práticas de organização e documentação de código. 
 
