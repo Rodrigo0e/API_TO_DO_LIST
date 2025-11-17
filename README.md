@@ -24,7 +24,8 @@ O projeto utiliza **SQLite** como banco de dados local e conta com um **sistema 
 - **dotenv** — para variáveis de ambiente (.env).  
 - **uuid** — para geração de identificadores únicos nas tarefas.  
 - **date-fns** — para formatação de data e hora nos logs.  
-- **nodemon** — para reiniciar automaticamente o servidor durante o desenvolvimento.  
+- **nodemon** — para reiniciar automaticamente o servidor durante o desenvolvimento.
+- **sequelize-cli** — ferramenta para criar e gerenciar migrations e tarefas do banco de dados.
 
 ---
 
@@ -63,16 +64,24 @@ O servidor será iniciado na porta configurada.
 
 ---
 
+### Executa todas as migrations pendentes
+
+```bash
+npx sequelize-cli db:migrate
+```
+
 ## Estrutura de pastas
 
 ```
 TO-DO-LIST/
 ├── src/
 │   ├── config/
-│   │   └── database.js
+│   │   └── config.cjs
 │   ├── controllers/
 │   │   └── tarefasControllers.js
 │   ├── database/
+│   │   ├── migrations/
+│   │   │   └── 20251115154143-create-tarefas.cjs
 │   │   └── database.sqlite
 │   ├── logs/
 │   │   └── req.log
@@ -83,9 +92,12 @@ TO-DO-LIST/
 │   ├── routes/
 │   │   └── tarefasRoutes.js
 │   └── app.js
+├── .env
 ├── .env.example
 ├── .gitignore
+├── .sequelizerc
 ├── package.json
+├── package-lock.json
 ├── server.js
 └── README.md
 ```
@@ -107,7 +119,7 @@ TO-DO-LIST/
 
 ## Autor
 
-Desenvolvido com 💻 por **Rodrigo Souza**  
+Desenvolvido por **Rodrigo Souza**  
 
 Este projeto foi desenvolvido como parte das atividades do curso da Programadores do Amanhã, com o objetivo de praticar Node.js, Express, Sequelize e boas práticas de organização e documentação de código. 
 
