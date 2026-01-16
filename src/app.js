@@ -15,7 +15,10 @@ const app = express();
 // Permite que o servidor entenda JSON no corpo das requisições
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://127.0.0.1:5500/index.html',
+  credentials: true
+}));
 
 // Usa o middleware para registrar logs de cada requisição
 app.use(logger);
