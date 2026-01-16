@@ -20,7 +20,11 @@ const Tarefa = db.define("Tarefa", {
   status: {
     type: DataTypes.STRING,         // Status da tarefa
     allowNull: false,               // Obrigatório
-  }
+  },
+  prioridade: {
+    type: DataTypes.STRING,         // Prioridade da tarefa
+    allowNull: false,               // Obrigatório
+  },
 }, {
   timestamps: false // Remove createdAt e updatedAt, removi eles porque fiz o logger.js para isso
 });

@@ -1,6 +1,8 @@
 // Importa o framework Express
 import express from "express";
 
+import cors from "cors";
+
 // Importa as rotas de tarefas
 import tarefasRoutes from "./routes/tarefasRoutes.js";
 
@@ -12,6 +14,8 @@ const app = express();
 
 // Permite que o servidor entenda JSON no corpo das requisições
 app.use(express.json());
+
+app.use(cors());
 
 // Usa o middleware para registrar logs de cada requisição
 app.use(logger);

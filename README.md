@@ -26,6 +26,7 @@ O projeto utiliza **SQLite** como banco de dados local e conta com um **sistema 
 - **date-fns** — para formatação de data e hora nos logs.  
 - **nodemon** — para reiniciar automaticamente o servidor durante o desenvolvimento.
 - **sequelize-cli** — ferramenta para criar e gerenciar migrations e tarefas do banco de dados.
+- **cors** — ferramenta que permite que aplicações de outros domínios/portas façam requisições à sua API.
 
 ---
 

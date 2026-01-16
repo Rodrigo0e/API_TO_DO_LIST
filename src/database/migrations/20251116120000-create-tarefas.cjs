@@ -21,6 +21,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      prioridade: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      }
     });
   },
 

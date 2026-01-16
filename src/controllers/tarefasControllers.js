@@ -7,8 +7,11 @@ const STATUS_PERMITIDOS = ["pendente", "em andamento", "concluida"];
 // Função auxiliar para verificar se o status informado é válido
 const validarStatus = (status) => STATUS_PERMITIDOS.includes(status);
 
+const PRIORIDADES_ACEITAS = ["baixa", "media", "alta"];
+
+const validarPrioridade = (prioridade) => PRIORIDADES_ACEITAS.includes(prioridade);
 // Classe que contém todos os métodos relacionados às tarefas
-class tarefasControllers {
+class TarefasControllers {
 
   // =============================
   //     Criar uma nova tarefa
@@ -16,11 +19,20 @@ class tarefasControllers {
   static async criarTarefa(req, res) {
     try {
       // Extrai os campos do corpo da requisição
-      const { titulo, descricao, status } = req.body;
+      let { titulo, descricao, status, prioridade } = req.body;
 
       // Valida se os campos obrigatórios foram preenchidos
       if (!titulo || !descricao) {
         return res.status(400).json({ erro: "Todos os campos devem ser preenchidos!" });
+      }
+
+      // Define o status padrão como "pendente" se não for fornecido
+      if (!status) {
+        status = "pendente";
+      }
+
+      if(!prioridade) {
+        prioridade = "baixa";
       }
 
       // Valida se o status informado é válido
@@ -29,9 +41,14 @@ class tarefasControllers {
           erro: "Status inválido. Use 'pendente', 'em andamento' ou 'concluida'.",
         });
       }
+      if(!validarPrioridade(prioridade)) {
+        return res.status(400).json({
+          erro: "Adicione uma prioridade. Use 'baixa', 'media' ou 'alta'.",
+        });
+      }
 
       // Cria a nova tarefa no banco de dados
-      const novaTarefa = await Tarefa.create({ titulo, descricao, status });
+      const novaTarefa = await Tarefa.create({ titulo, descricao, status, prioridade });
 
       // Retorna a tarefa criada e uma mensagem de sucesso
       return res.status(201).json({
@@ -52,16 +69,52 @@ class tarefasControllers {
   // =============================
   static async listarTarefas(req, res) {
     try {
-      // Busca todas as tarefas no banco de dados
-      const tarefas = await Tarefa.findAll();
+      const {
+        status,
+        prioridade,
+        sort = "id",
+        order = "asc",
+        page = 1,
+        limit = 10,
+      } = req.query;
 
-      // Caso não existam tarefas cadastradas, retorna mensagem informativa
-      if (tarefas.length === 0) {
-        return res.status(200).json({ mensagem: "Nenhuma tarefa cadastrada ainda." });
+      // Converte para números
+      const pageNumber = parseInt(page) || 1;
+      const limitNumber = parseInt(limit) || 10;
+      const offset = (pageNumber - 1) * limitNumber;
+
+      const where = {};
+
+      if (status && validarStatus(status)) {
+        where.status = status;
       }
 
-      // Retorna a lista de tarefas
-      res.status(200).json(tarefas);
+      if (prioridade && validarPrioridade(prioridade)) {
+        where.prioridade = prioridade;
+      }
+      
+      const orderClause = [[sort, order]];
+
+      const { rows, count } = await Tarefa.findAndCountAll({
+        where,
+        order: orderClause,
+        limit: limitNumber,
+        offset,
+      });
+
+      if (rows.length === 0) {
+        return res.status(200).json({ mensagem: "Nenhuma tarefa cadastrada."})
+      }
+
+      return res.status(200).json({
+        data: rows,
+        meta: {
+          total: count,
+          page: pageNumber,
+          limit: limitNumber,
+          totalPages: Math.ceil(count / limitNumber),
+        }
+      });
 
     } catch (erro) {
       // Mostra no terminal qual foi o erro exato  
@@ -101,7 +154,7 @@ class tarefasControllers {
   static async atualizarTarefa(req, res) {
     try {
       const { id } = req.params; // Pega o ID da URL
-      const { titulo, descricao, status } = req.body; // Pega os dados do corpo da requisição
+      const { titulo, descricao, status, prioridade } = req.body; // Pega os dados do corpo da requisição
 
       // Busca a tarefa no banco de dados
       const tarefa = await Tarefa.findByPk(id);
@@ -110,7 +163,7 @@ class tarefasControllers {
       }
 
       // Valida se os campos estão completos
-      if (!titulo || !descricao || !status) {
+      if (!titulo || !descricao || !status || !prioridade) {
         return res.status(400).json({ erro: "Todos os campos devem ser preenchidos!" });
       }
 
@@ -121,8 +174,14 @@ class tarefasControllers {
         });
       }
 
+      if(!validarPrioridade(prioridade)) {
+        return res.status(400).json({
+          erro: "Adicione uma prioridade. Use 'baixa', 'media' ou 'alta'.",
+        });
+      }
+
       // Atualiza os dados da tarefa
-      await tarefa.update({ titulo, descricao, status });
+      await tarefa.update({ titulo, descricao, status, prioridade });
 
       // Retorna a tarefa atualizada e uma mensagem de sucesso
       return res.status(200).json({
@@ -211,4 +270,4 @@ class tarefasControllers {
 }
 
 // Exporta a classe para ser usada nas rotas
-export default tarefasControllers;
+export default TarefasControllers;

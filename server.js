@@ -15,7 +15,24 @@ app.get("/", (req, res) => {
   res.status(200).send("API de Tarefas funcionando!");
 });
 
-// Inicia o servidor na porta definida
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+// Função para iniciar o servidor
+async function iniciarServidor() {
+  try {
+    // Sincroniza os modelos com o banco de dados
+    // force: true recria a tabela (útil para desenvolvimento)
+    // Remova { force: true } em produção e use { alter: true }
+    await db.sync({ alter: true });
+    console.log("Banco de dados sincronizado com sucesso!");
+
+    // Inicia o servidor na porta definida
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
+  } catch (erro) {
+    console.error("Erro ao sincronizar banco de dados:", erro);
+    process.exit(1);
+  }
+}
+
+// Inicia o servidor
+iniciarServidor();
