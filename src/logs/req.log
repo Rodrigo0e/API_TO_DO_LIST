@@ -272,3 +272,8 @@
 2026-01-16	13:02:04	cf64c7cf-13b4-4eef-bd33-2ff921c3febb	DELETE	/tarefas/568d914f-dbe1-46b5-90c3-00ba02489d8d	sem origem
 2026-01-16	13:02:28	00703f17-3fc3-4b71-b52c-bc196dd4ae5a	GET	/tarefas/568d914f-dbe1-46b5-90c3-00ba02489d8d	sem origem
 2026-01-16	13:02:52	fec32980-d227-4e17-adcf-eb64bcfbb6f4	POST	/tarefas	sem origem
+2026-01-21	20:53:42	fac53fa5-ee13-41b0-833d-3700b115f182	GET	/tarefas	sem origem
+2026-01-21	20:54:17	bd7fef2d-39b5-4e0e-97ac-9cff9aee628f	GET	/tarefas/74911243-868d-486b-afa3-4e9b479e0f40	sem origem
+2026-01-21	20:56:18	8fb3f90c-9ec9-4fda-9b8f-7424a7051b36	POST	/tarefas	sem origem
+2026-01-21	20:58:10	20102c67-6f1b-4243-8104-dd61448af75e	POST	/tarefas/53d944c6-5039-40e9-a22f-beee178df080	sem origem
+2026-01-21	20:58:13	c09c4681-7e1a-42a8-ada9-ec6fb30e191f	GET	/tarefas/53d944c6-5039-40e9-a22f-beee178df080	sem origem
