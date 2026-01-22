@@ -5,7 +5,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "npm install && npx sequelize-cli db:migrate",
+    "dev": "nodemon server.js",
+    "prod": "node server.js"
   },
   "keywords": [],
   "author": "",
